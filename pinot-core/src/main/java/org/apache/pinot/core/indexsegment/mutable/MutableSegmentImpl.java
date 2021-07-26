@@ -671,20 +671,20 @@ public class MutableSegmentImpl implements MutableSegment {
       DataType dataType = metricFieldSpec.getDataType();
       switch (dataType) {
         case INT:
-          forwardIndex.setInt(docId, (Integer) value + forwardIndex.getInt(docId));
+          forwardIndex.setInt(docId, Math.max((Integer) value, forwardIndex.getInt(docId)));
           break;
         case LONG:
-          forwardIndex.setLong(docId, (Long) value + forwardIndex.getLong(docId));
+          forwardIndex.setLong(docId, Math.max((Long) value,forwardIndex.getLong(docId)));
           break;
         case FLOAT:
-          forwardIndex.setFloat(docId, (Float) value + forwardIndex.getFloat(docId));
+          forwardIndex.setFloat(docId, Math.max((Float) value, forwardIndex.getFloat(docId)));
           break;
         case DOUBLE:
-          forwardIndex.setDouble(docId, (Double) value + forwardIndex.getDouble(docId));
+          forwardIndex.setDouble(docId, Math.max((Double) value,forwardIndex.getDouble(docId)));
           break;
         default:
           throw new UnsupportedOperationException(
-              "Unsupported data type: " + dataType + " for aggregate metric column: " + column);
+                  "Unsupported data type: " + dataType + " for aggregate metric column: " + column);
       }
     }
   }
